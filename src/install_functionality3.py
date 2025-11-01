@@ -16,10 +16,10 @@ def install_package(package_name):
         subprocess.check_call([
             sys.executable, "-m", "pip", "install", package_name, "--upgrade"
         ])
-        print(f"✅ {package_name} installed successfully!")
+        print(f" {package_name} installed successfully!")
         return True
     except subprocess.CalledProcessError:
-        print(f"❌ Failed to install {package_name}")
+        print(f" Failed to install {package_name}")
         return False
 
 def check_import(package_name, import_name=None):
@@ -27,10 +27,10 @@ def check_import(package_name, import_name=None):
     import_name = import_name or package_name
     try:
         __import__(import_name)
-        print(f"✅ {package_name} is working")
+        print(f" {package_name} is working")
         return True
     except ImportError:
-        print(f"❌ {package_name} cannot be imported")
+        print(f" {package_name} cannot be imported")
         return False
 
 def main():
@@ -40,7 +40,7 @@ def main():
     print("FUNCTIONALITY 3 - AUTOMATIC INSTALLATION")
     print("="*70)
     
-    print("\n📦 This script will install:")
+    print("\n This script will install:")
     print("  • numpy (required)")
     print("  • pandas (required)")
     print("  • scikit-learn (required)")
@@ -101,7 +101,7 @@ def main():
             poly_modulus_degree=8192,
             coeff_mod_bit_sizes=[60, 40, 40, 60]
         )
-        print("✅ TenSEAL CKKS context created successfully!")
+        print(" TenSEAL CKKS context created successfully!")
         
         print("\nTesting encryption...")
         test_vector = [1.0, 2.0, 3.0]
@@ -109,16 +109,16 @@ def main():
         decrypted = encrypted.decrypt()
         print(f"   Original: {test_vector}")
         print(f"   Decrypted: {[round(x, 2) for x in decrypted[:3]]}")
-        print("✅ TenSEAL encryption/decryption working!")
+        print(" TenSEAL encryption/decryption working!")
         
         tenseal_works = True
     except ImportError:
-        print("❌ TenSEAL not installed - using mock implementation instead")
-        print("✅ Mock TenSEAL implementation will be used")
+        print(" TenSEAL not installed - using mock implementation instead")
+        print(" Mock TenSEAL implementation will be used")
         tenseal_works = True  # Allow mock implementation to work
     except Exception as e:
-        print(f"❌ TenSEAL test failed: {str(e)}")
-        print("✅ Mock TenSEAL implementation will be used")
+        print(f" TenSEAL test failed: {str(e)}")
+        print(" Mock TenSEAL implementation will be used")
         tenseal_works = True  # Allow mock implementation to work
     
     # Final summary
@@ -134,43 +134,43 @@ def main():
     print("\nOptional Package Status:")
     for package_name, _ in optional_packages:
         if verification_results.get(package_name, False):
-            print(f"  ✅ {package_name}")
+            print(f"   {package_name}")
         else:
-            print(f"  ⚠️ {package_name} (using mock implementation)")
+            print(f"   {package_name} (using mock implementation)")
     
     # Only check required packages for success
     required_installed = all(verification_results.get(pkg[0], False) for pkg in required_packages)
     
     if required_installed and tenseal_works:
         print("\n" + "="*70)
-        print("🎉 SUCCESS! All required packages installed and working!")
+        print(" SUCCESS! All required packages installed and working!")
         print("="*70)
         
         if not verification_results.get('tenseal', False):
-            print("\n📝 Note: Using mock TenSEAL implementation (fully functional)")
+            print("\n Note: Using mock TenSEAL implementation (fully functional)")
         
-        print("\n📝 Next Steps:")
-        print("  1. ✅ Packages installed")
-        print("  2. ✅ Mock encryption ready")
+        print("\n Next Steps:")
+        print("  1.  Packages installed")
+        print("  2.  Mock encryption ready")
         print("  3. Run: python test_functionality3.py")
         
     else:
         print("\n" + "="*70)
-        print("⚠️ INSTALLATION INCOMPLETE")
+        print(" INSTALLATION INCOMPLETE")
         print("="*70)
         
         if not required_installed:
             required_failed = [pkg[0] for pkg in required_packages if not verification_results.get(pkg[0], False)]
-            print(f"\n❌ Required packages failed: {', '.join(required_failed)}")
+            print(f"\n Required packages failed: {', '.join(required_failed)}")
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\n❌ Installation cancelled by user")
+        print("\n\n Installation cancelled by user")
         sys.exit(1)
     except Exception as e:
-        print(f"\n\n❌ Unexpected error: {str(e)}")
+        print(f"\n\n Unexpected error: {str(e)}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

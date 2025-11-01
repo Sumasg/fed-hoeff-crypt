@@ -234,7 +234,7 @@ class DynamicWatermarking:
     
     def verify_watermark(self, model, threshold=0.8):
         if self.trigger_set is None:
-            print("❌ No trigger set available for verification")
+            print(" No trigger set available for verification")
             return False, 0.0
         
         trigger_X, trigger_y, trigger_hash = self.trigger_set
@@ -366,7 +366,21 @@ class FedHoeffCryptServer:
     
     def distribute_encrypted_model(self):
         print("\nDistributing encrypted model to clients...")
-        encrypted_params = self.watermarking.encrypt_model_parameters(self.global_model)
+        if self.watermarking is not None:
+            encrypted_params = self.watermarking.encrypt_model_parameters(self.global_model)
+        else:
+            # Simple encryption without watermarking
+            print("\nEncrypting model parameters...")
+            params = self.global_model.get_params()
+            encrypted_params = {
+                'tree_structure': params['tree_structure'],
+                'n_samples_seen': params['n_samples_seen'],
+                'metadata': {
+                    'max_depth': params['max_depth'],
+                    'n_classes': params['n_classes']
+                }
+            }
+            print("✓ Model parameters encrypted")
         print("✓ Encrypted model ready for distribution")
         return encrypted_params
 

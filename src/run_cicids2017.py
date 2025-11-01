@@ -31,8 +31,8 @@ def main():
     
     # Check if folder exists
     if not os.path.exists(folder_path):
-        print(f"❌ Error: Folder not found: {folder_path}")
-        print("\n📝 Please update the folder_path variable to match your location")
+        print(f" Error: Folder not found: {folder_path}")
+        print("\n Please update the folder_path variable to match your location")
         print("   Example: folder_path = r'C:\\Users\\YourName\\Downloads\\CICIDS2017'")
         return
     
@@ -60,7 +60,7 @@ def main():
         print("\n✓ Data loading and preparation complete!")
         
     except Exception as e:
-        print(f"\n❌ Error loading data: {str(e)}")
+        print(f"\n Error loading data: {str(e)}")
         print("\nTroubleshooting tips:")
         print("1. Make sure the folder path is correct")
         print("2. Check that CSV files are in the folder")
@@ -152,7 +152,7 @@ def main():
                     local_model.partial_fit(X_batch, y_batch)
             
             local_models.append(local_model)
-            print(f"    ✓ Client {client_id} training complete")
+            print(f" Client {client_id} training complete")
         
         # Aggregate models (simplified - use last trained model)
         # In production, implement proper federated averaging
@@ -163,12 +163,12 @@ def main():
         accuracy = accuracy_score(y_test, y_pred)
         round_accuracies.append(accuracy)
         
-        print(f"\n  📊 Round {round_num + 1} Results:")
-        print(f"     Global Model Accuracy: {accuracy:.4f}")
+        print(f"\n Round {round_num + 1} Results:")
+        print(f"   Global Model Accuracy: {accuracy:.4f}")
         
         # Show progress every 10 rounds
         if (round_num + 1) % 10 == 0:
-            print(f"\n  ✓ Completed {round_num + 1}/{n_rounds} rounds")
+            print(f"\n   Completed {round_num + 1}/{n_rounds} rounds")
             print(f"     Average accuracy (last 10 rounds): {np.mean(round_accuracies[-10:]):.4f}")
     
     # =========================================================================
@@ -185,12 +185,12 @@ def main():
     # Calculate metrics
     accuracy = accuracy_score(y_test, y_pred)
     
-    print(f"\n📊 Final Model Performance:")
+    print(f"\n Final Model Performance:")
     print(f"   Accuracy: {accuracy:.4f}")
     
     # Confusion Matrix
     cm = confusion_matrix(y_test, y_pred)
-    print(f"\n📈 Confusion Matrix:")
+    print(f"\n Confusion Matrix:")
     print(cm)
     
     # Calculate TP, TN, FP, FN (for binary classification)
@@ -210,13 +210,13 @@ def main():
         print(f"   F1-Score: {f1:.4f}")
     
     # Classification report
-    print(f"\n📋 Classification Report:")
+    print(f"\n Classification Report:")
     target_names = [preprocessor.label_encoder.classes_[i] 
                    for i in range(min(n_classes, len(preprocessor.label_encoder.classes_)))]
     print(classification_report(y_test, y_pred, target_names=target_names))
     
     # Feature importance
-    print(f"\n🔍 Top 10 Most Important Features:")
+    print(f"\n Top 10 Most Important Features:")
     feature_importance = global_model.extract_features(X_test)
     sorted_features = sorted(feature_importance.items(), 
                             key=lambda x: x[1], reverse=True)[:10]
@@ -225,18 +225,18 @@ def main():
         print(f"   {feat_name}: {importance:.4f}")
     
     # Training curve
-    print(f"\n📉 Accuracy over Rounds:")
+    print(f"\n Accuracy over Rounds:")
     for i in range(0, len(round_accuracies), 10):
         print(f"   Rounds {i+1}-{min(i+10, len(round_accuracies))}: {np.mean(round_accuracies[i:i+10]):.4f}")
     
     print("\n" + "="*70)
-    print("✅ FEDERATED LEARNING COMPLETE!")
+    print(" FEDERATED LEARNING COMPLETE!")
     print("="*70)
     
     # =========================================================================
     # STEP 6: SAVE RESULTS (OPTIONAL)
     # =========================================================================
-    print("\n💾 Saving results...")
+    print("\n Saving results...")
     
     # Save predictions to a dedicated results folder
     import pickle
@@ -266,15 +266,15 @@ def main():
         "Probability_Class_1": proba1
     })
     results_df.to_csv(csv_path, index=False)
-    print(f"✓ Results saved to '{csv_path}'")
+    print(f" Results saved to '{csv_path}'")
 
     # Save model parameters (for later use)
     model_params = global_model.get_params()
     with open(pkl_path, "wb") as f:
         pickle.dump(model_params, f)
-    print(f"✓ Model parameters saved to '{pkl_path}'")
+    print(f" Model parameters saved to '{pkl_path}'")
 
-    print("\n🎉 All done! Your FL-IDS system is trained and evaluated.")
+    print("\n All done! Your FL-IDS system is trained and evaluated.")
 
 
 # =============================================================================
@@ -317,12 +317,7 @@ def load_specific_files_example():
 if __name__ == "__main__":
     import pandas as pd
     
-    # IMPORTANT: Update this path to your actual folder location!
-    # Example Windows path: r'C:\Users\YourName\Downloads\CICIDS2017'
-    # Example Linux path: '/home/yourname/Downloads/CICIDS2017'
-    
     # Run the main function
     main()
     
-    # Or run with specific files
-    # load_specific_files_example()
+   

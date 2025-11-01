@@ -606,10 +606,10 @@ class ModifiedHoeffdingTree:
 if __name__ == "__main__":
     print("Modified Hoeffding Anytime Tree (HAT) Module Ready!")
     print("\nKey Features:")
-    print("✓ Incremental learning with Hoeffding bounds")
-    print("✓ Polynomial activation functions for HE compatibility")
-    print("✓ Feature extraction and importance")
-    print("✓ Optimized for federated learning")
+    print(" Incremental learning with Hoeffding bounds")
+    print(" Polynomial activation functions for HE compatibility")
+    print(" Feature extraction and importance")
+    print(" Optimized for federated learning")
     
     # Example: Create and train HAT model
     print("\n" + "="*60)
@@ -657,4 +657,4 @@ if __name__ == "__main__":
     for feat_idx, importance in sorted_features:
         print(f"  Feature {feat_idx}: {importance:.4f}")
     
-    print("\n✓ HAT module ready for federated learning!")
+    print("\n HAT module ready for federated learning!")

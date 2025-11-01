@@ -17,30 +17,30 @@ def test_imports():
     
     try:
         import numpy as np
-        print("✅ numpy imported")
+        print(" numpy imported")
         
         import pandas as pd
-        print("✅ pandas imported")
+        print(" pandas imported")
         
         from sklearn.metrics import accuracy_score
-        print("✅ scikit-learn imported")
+        print(" scikit-learn imported")
         
         import tenseal as ts
-        print("✅ tenseal imported")
+        print(" tenseal imported")
         
         from ckks_watermarking import (
             CKKSEncryption, TriggerSetConstructor,
             FeatureProjector, DynamicWatermarking,
             FedHoeffCryptClient, FedHoeffCryptServer
         )
-        print("✅ ckks_watermarking imported")
+        print(" ckks_watermarking imported")
         
         from hat_algorithm import ModifiedHoeffdingTree
-        print("✅ hat_algorithm imported")
+        print(" hat_algorithm imported")
         
         return True
     except ImportError as e:
-        print(f"❌ Import failed: {str(e)}")
+        print(f" Import failed: {str(e)}")
         return False
 
 
@@ -67,14 +67,14 @@ def test_ckks_encryption():
         print(f"Error: {error:.6f}")
         
         if error < 0.01:
-            print("✅ CKKS encryption test passed")
+            print(" CKKS encryption test passed")
             return True
         else:
-            print("❌ CKKS encryption error too high")
+            print(" CKKS encryption error too high")
             return False
             
     except Exception as e:
-        print(f"❌ CKKS test failed: {str(e)}")
+        print(f" CKKS test failed: {str(e)}")
         return False
 
 
@@ -99,14 +99,14 @@ def test_trigger_set():
         )
         
         if len(trigger_X) == 50 and len(trigger_y) == 50:
-            print("✅ Trigger set construction passed")
+            print(" Trigger set construction passed")
             return True
         else:
-            print("❌ Trigger set size incorrect")
+            print(" Trigger set size incorrect")
             return False
             
     except Exception as e:
-        print(f"❌ Trigger set test failed: {str(e)}")
+        print(f" Trigger set test failed: {str(e)}")
         return False
 
 
@@ -130,14 +130,14 @@ def test_feature_projector():
         print(f"Projected shape: {projected.shape}")
         
         if projected.shape == (100, 32):
-            print("✅ Feature projection passed")
+            print(" Feature projection passed")
             return True
         else:
-            print("❌ Projection shape incorrect")
+            print(" Projection shape incorrect")
             return False
             
     except Exception as e:
-        print(f"❌ Feature projection test failed: {str(e)}")
+        print(f" Feature projection test failed: {str(e)}")
         return False
 
 
@@ -175,14 +175,14 @@ def test_watermarking():
         is_watermarked, accuracy = watermarking.verify_watermark(watermarked_model, threshold=0.6)
         
         if is_watermarked and accuracy >= 0.6:
-            print("✅ Watermarking system passed")
+            print(" Watermarking system passed")
             return True
         else:
-            print(f"⚠️ Watermark accuracy ({accuracy:.2f}) - may need adjustment")
+            print(f" Watermark accuracy ({accuracy:.2f}) - may need adjustment")
             return True  # Still pass as it's working
             
     except Exception as e:
-        print(f"❌ Watermarking test failed: {str(e)}")
+        print(f" Watermarking test failed: {str(e)}")
         import traceback
         traceback.print_exc()
         return False
@@ -248,11 +248,11 @@ def test_fedhoeffcrypt():
         print("\nAggregating models...")
         global_model = server.aggregate_models(client_updates)
         
-        print("✅ FedHoeffCrypt protocol passed")
+        print(" FedHoeffCrypt protocol passed")
         return True
         
     except Exception as e:
-        print(f"❌ FedHoeffCrypt test failed: {str(e)}")
+        print(f" FedHoeffCrypt test failed: {str(e)}")
         import traceback
         traceback.print_exc()
         return False
@@ -279,7 +279,7 @@ def run_all_tests():
         try:
             results[test_name] = test_func()
         except Exception as e:
-            print(f"\n❌ {test_name} crashed: {str(e)}")
+            print(f"\n {test_name} crashed: {str(e)}")
             results[test_name] = False
     
     # Summary
@@ -288,22 +288,22 @@ def run_all_tests():
     print("="*70)
     
     for test_name, result in results.items():
-        status = "✅ PASSED" if result else "❌ FAILED"
+        status = " PASSED" if result else " FAILED"
         print(f"  {test_name:20s} {status}")
     
     all_passed = all(results.values())
     
     print("\n" + "="*70)
     if all_passed:
-        print("🎉 ALL TESTS PASSED!")
+        print(" ALL TESTS PASSED!")
         print("="*70)
-        print("\n✅ Functionality 3 is working correctly!")
+        print("\n Functionality 3 is working correctly!")
         print("\nYou can now:")
         print("  1. Integrate with Functionalities 1 & 2")
         print("  2. Run complete federated learning experiments")
         print("  3. Test with real datasets (CICIDS2017/2018/EdgeIIoT)")
     else:
-        print("⚠️ SOME TESTS FAILED")
+        print(" SOME TESTS FAILED")
         print("="*70)
         print("\nPlease check the failed tests above.")
     
@@ -315,5 +315,5 @@ if __name__ == "__main__":
         success = run_all_tests()
         sys.exit(0 if success else 1)
     except KeyboardInterrupt:
-        print("\n\n❌ Tests interrupted by user")
+        print("\n\n Tests interrupted by user")
         sys.exit(1)
