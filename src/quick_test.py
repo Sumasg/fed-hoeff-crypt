@@ -9,13 +9,13 @@ This script will:
 4. Show you it's working!
 """
 
-print("🚀 Starting Quick Test...")
+print("Starting Quick Test...")
 print("="*70)
 
 # ============================================================================
 # STEP 1: Check Dependencies
 # ============================================================================
-print("\n📦 Checking dependencies...")
+print("\n Checking dependencies...")
 
 required_packages = {
     'numpy': 'numpy',
@@ -27,23 +27,23 @@ missing_packages = []
 for package, install_name in required_packages.items():
     try:
         __import__(package)
-        print(f"  ✓ {package}")
+        print(f"  {package}")
     except ImportError:
-        print(f"  ✗ {package} - MISSING")
+        print(f" {package} - MISSING")
         missing_packages.append(install_name)
 
 if missing_packages:
-    print(f"\n❌ Missing packages: {', '.join(missing_packages)}")
+    print(f"\n Missing packages: {', '.join(missing_packages)}")
     print(f"\nInstall them with:")
     print(f"pip install {' '.join(missing_packages)}")
     exit()
 
-print("\n✓ All dependencies installed!")
+print("\n All dependencies installed!")
 
 # ============================================================================
 # STEP 2: Import Required Modules
 # ============================================================================
-print("\n📥 Importing modules...")
+print("\n Importing modules...")
 
 import numpy as np
 import pandas as pd
@@ -52,12 +52,12 @@ from sklearn.metrics import accuracy_score
 # Set random seed
 np.random.seed(42)
 
-print("✓ Modules imported successfully!")
+print(" Modules imported successfully!")
 
 # ============================================================================
 # STEP 3: Create Simple Test Data
 # ============================================================================
-print("\n📊 Creating test dataset...")
+print("\n Creating test dataset...")
 
 # Create simple 2-class dataset
 n_samples = 1000
@@ -68,14 +68,14 @@ X = np.random.randn(n_samples, n_features)
 # Create simple pattern: if feature_0 > 0, class 1, else class 0
 y = (X[:, 0] > 0).astype(int)
 
-print(f"✓ Created dataset: {n_samples} samples, {n_features} features")
+print(f" Created dataset: {n_samples} samples, {n_features} features")
 print(f"  Class 0: {np.sum(y==0)} samples")
 print(f"  Class 1: {np.sum(y==1)} samples")
 
 # ============================================================================
 # STEP 4: Split Data for Federated Learning
 # ============================================================================
-print("\n🔀 Distributing data to 10 clients...")
+print("\n Distributing data to 10 clients...")
 
 # Split into train/test
 split_idx = int(0.8 * n_samples)
@@ -97,14 +97,14 @@ for i in range(n_clients):
     client_data.append((X_chunks[i], y_chunks[i]))
     print(f"  Client {i}: {len(X_chunks[i])} samples")
 
-print(f"\n✓ Data distributed!")
+print(f"\n Data distributed!")
 print(f"  Training samples: {len(X_train)}")
 print(f"  Test samples: {len(X_test)}")
 
 # ============================================================================
 # STEP 5: Simple Federated Learning Simulation
 # ============================================================================
-print("\n🤖 Running simple FL simulation...")
+print("\n Running simple FL simulation...")
 print("  (Using basic decision tree for demo)")
 
 from sklearn.tree import DecisionTreeClassifier
@@ -144,17 +144,17 @@ for round_num in range(n_rounds):
     accuracy = accuracy_score(y_test, global_predictions)
     print(f"    Global accuracy: {accuracy:.4f}")
 
-print("\n✓ FL simulation complete!")
+print("\n FL simulation complete!")
 
 # ============================================================================
 # STEP 6: Final Results
 # ============================================================================
 print("\n" + "="*70)
-print("📊 FINAL RESULTS")
+print(" FINAL RESULTS")
 print("="*70)
 
 final_accuracy = accuracy_score(y_test, global_predictions)
-print(f"\n✅ Final Global Model Accuracy: {final_accuracy:.4f}")
+print(f"\n Final Global Model Accuracy: {final_accuracy:.4f}")
 
 # Show confusion matrix
 from sklearn.metrics import confusion_matrix
@@ -165,20 +165,19 @@ print(f"  [[TN={cm[0,0]}, FP={cm[0,1]}]")
 print(f"   [FN={cm[1,0]}, TP={cm[1,1]}]]")
 
 print("\n" + "="*70)
-print("🎉 SUCCESS! Everything is working!")
+print(" SUCCESS! Everything is working!")
 print("="*70)
 
-print("\n📝 Next Steps:")
-print("  1. ✓ Dependencies are installed")
-print("  2. ✓ Basic FL is working")
-print("  3. → Now use the full modules (data_preprocessing.py & hat_algorithm.py)")
-print("  4. → Run main.py for complete examples")
-print("  5. → Add your real datasets (CICIDS2017/2018/EdgeIIoT)")
-
-print("\n💡 To test the full modules:")
+print("\n Next Steps:")
+print("  1. Dependencies are installed")
+print("  2. Basic FL is working")
+print("  3. Now use the full modules (data_preprocessing.py & hat_algorithm.py)")
+print("  4. Run main.py for complete examples")
+print("  5. Add your real datasets (CICIDS2017/2018/EdgeIIoT)")
+print("\n  To test the full modules:")
 print("  1. Save Functionality 1 as 'data_preprocessing.py'")
 print("  2. Save Functionality 2 as 'hat_algorithm.py'")
 print("  3. Save the setup guide as 'main.py'")
 print("  4. Run: python main.py")
 
-print("\n🚀 You're all set to proceed!")
+print("\n You're all set to proceed!")

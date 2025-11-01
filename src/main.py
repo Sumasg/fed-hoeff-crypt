@@ -1,67 +1,3 @@
-"""
-Complete Setup Guide and Executable Examples
-For Secure FL-based IDS System
-
-Follow these steps to run the code successfully.
-"""
-
-# =============================================================================
-# STEP 1: INSTALLATION
-# =============================================================================
-"""
-First, install all required dependencies. Run these commands in your terminal:
-
-pip install numpy pandas scikit-learn
-pip install matplotlib seaborn  # For visualization
-pip install tenseal  # For homomorphic encryption (we'll need this later)
-
-Or create a requirements.txt file with:
----
-numpy>=1.21.0
-pandas>=1.3.0
-scikit-learn>=1.0.0
-matplotlib>=3.4.0
-seaborn>=0.11.0
-tenseal>=0.3.0
----
-
-Then run: pip install -r requirements.txt
-"""
-
-# =============================================================================
-# STEP 2: PROJECT STRUCTURE
-# =============================================================================
-"""
-Create this folder structure:
-
-FL_IDS_Project/
-│
-├── data/
-│   ├── CICIDS2017.csv
-│   ├── CICIDS2018.csv
-│   └── EdgeIIoT.csv
-│
-├── src/
-│   ├── data_preprocessing.py  (Functionality 1)
-│   ├── hat_algorithm.py       (Functionality 2)
-│   └── main.py                (This file)
-│
-└── results/
-    └── (output files will be saved here)
-"""
-
-# =============================================================================
-# STEP 3: SAVE THE MODULES
-# =============================================================================
-"""
-1. Copy Functionality 1 code → save as 'data_preprocessing.py'
-2. Copy Functionality 2 code → save as 'hat_algorithm.py'
-3. Copy this file → save as 'main.py'
-"""
-
-# =============================================================================
-# STEP 4: EXECUTABLE EXAMPLE - COMPLETE WORKFLOW
-# =============================================================================
 
 import numpy as np
 import pandas as pd
@@ -142,7 +78,7 @@ def example_1_test_polynomial_activations():
     print("\nPolynomial Tanh (degree 3):")
     print(poly_act.polynomial_tanh(x, degree=3))
     
-    print("\n✓ Polynomial activations working correctly!")
+    print("\n Polynomial activations working correctly!")
 
 
 def example_2_test_data_preprocessing():
@@ -158,7 +94,7 @@ def example_2_test_data_preprocessing():
     
     # Save to CSV (simulate real dataset)
     df.to_csv('synthetic_ids_data.csv', index=False)
-    print("\n✓ Saved synthetic dataset to 'synthetic_ids_data.csv'")
+    print("\n Saved synthetic dataset to 'synthetic_ids_data.csv'")
     
     # Load and preprocess
     preprocessor = IDSDataPreprocessor(dataset_name='Synthetic')
@@ -178,7 +114,7 @@ def example_2_test_data_preprocessing():
     # Normalize
     X_train_scaled, X_test_scaled = preprocessor.normalize_features(X_train, X_test)
     
-    print(f"\n✓ Preprocessing complete!")
+    print(f"\n Preprocessing complete!")
     print(f"  Training set: {X_train_scaled.shape}")
     print(f"  Test set: {X_test_scaled.shape}")
     print(f"  Number of classes: {len(np.unique(y_train))}")
@@ -208,7 +144,7 @@ def example_3_test_federated_distribution():
         random_state=42
     )
     
-    print(f"\n✓ Federated distribution complete!")
+    print(f"\n Federated distribution complete!")
     print(f"  Number of clients: {len(client_data)}")
     print(f"  Global test set: {X_test.shape}")
     
@@ -243,7 +179,7 @@ def example_4_train_hat_model():
         n_classes=n_classes
     )
     
-    print("\n✓ HAT model created")
+    print("\n HAT model created")
     print(f"  Max depth: {hat_model.max_depth}")
     print(f"  Activation: {hat_model.activation}")
     print(f"  Polynomial degree: {hat_model.polynomial_degree}")
@@ -259,14 +195,14 @@ def example_4_train_hat_model():
         if (i // batch_size + 1) % 10 == 0:
             print(f"  Processed {i+len(X_batch)}/{len(X_train)} samples")
     
-    print("\n✓ Training complete!")
+    print("\n Training complete!")
     
     # Evaluate model
     print("\nEvaluating model...")
     y_pred = hat_model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     
-    print(f"\n✓ Model Evaluation:")
+    print(f"\n Model Evaluation:")
     print(f"  Accuracy: {accuracy:.4f}")
     
     # Get probabilities (with polynomial activation)
@@ -359,7 +295,7 @@ def example_5_simulate_federated_learning():
         accuracy = accuracy_score(y_test, y_pred)
         print(f"\n  Global Model Accuracy: {accuracy:.4f}")
     
-    print("\n✓ Federated Learning simulation complete!")
+    print("\n Federated Learning simulation complete!")
     return global_model
 
 
@@ -380,11 +316,11 @@ def main():
         example_5_simulate_federated_learning()
         
         print("\n" + "="*70)
-        print("✓ ALL EXAMPLES COMPLETED SUCCESSFULLY!")
+        print(" ALL EXAMPLES COMPLETED SUCCESSFULLY!")
         print("="*70)
         
     except Exception as e:
-        print(f"\n❌ Error occurred: {str(e)}")
+        print(f"\n Error occurred: {str(e)}")
         import traceback
         traceback.print_exc()
 
@@ -394,64 +330,4 @@ def main():
 # =============================================================================
 
 if __name__ == "__main__":
-    # OPTION 1: Run all examples
     main()
-    
-    # OPTION 2: Run individual examples
-    # Uncomment the example you want to run:
-    
-    # example_1_test_polynomial_activations()
-    # example_2_test_data_preprocessing()
-    # example_3_test_federated_distribution()
-    # example_4_train_hat_model()
-    # example_5_simulate_federated_learning()
-
-
-# =============================================================================
-# STEP 5: RUNNING WITH REAL DATASETS
-# =============================================================================
-"""
-To use real CICIDS2017/2018 or EdgeIIoT datasets:
-
-1. Download datasets:
-   - CICIDS2017: https://www.unb.ca/cic/datasets/ids-2017.html
-   - CICIDS2018: https://www.unb.ca/cic/datasets/ids-2018.html
-   - EdgeIIoT: https://www.kaggle.com/datasets/mohamedamineferrag/edgeiiotset
-
-2. Place CSV files in 'data/' folder
-
-3. Replace synthetic data creation with real data loading:
-
-   client_data, X_test, y_test, preprocessor = prepare_federated_dataset(
-       file_path='data/CICIDS2017.csv',  # Change this path
-       dataset_name='CICIDS2017',
-       n_clients=10,
-       distribution='iid',
-       test_size=0.2
-   )
-
-4. Run the code normally
-"""
-
-
-# =============================================================================
-# TROUBLESHOOTING
-# =============================================================================
-"""
-Common Issues and Solutions:
-
-1. ModuleNotFoundError: No module named 'xxx'
-   Solution: Install missing package with pip install xxx
-
-2. FileNotFoundError: 'xxx.csv'
-   Solution: Check file path or use synthetic dataset first
-
-3. Memory Error with large datasets
-   Solution: Reduce n_samples or process in smaller batches
-
-4. Import errors
-   Solution: Make sure all files are in same directory or proper Python path
-
-5. Low accuracy
-   Solution: Increase training epochs, adjust hyperparameters, or use more data
-"""

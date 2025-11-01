@@ -87,7 +87,7 @@ class MultiFileDatasetLoader:
                 total_rows += len(df)
                 
             except Exception as e:
-                print(f"  ⚠️ Error loading {file_path}: {str(e)}")
+                print(f" Error loading {file_path}: {str(e)}")
                 continue
         
         if not dfs:
@@ -100,7 +100,7 @@ class MultiFileDatasetLoader:
         combined_df = pd.concat(dfs, ignore_index=True)
         
         if verbose:
-            print(f"✓ Combined dataset: {combined_df.shape[0]} rows, {combined_df.shape[1]} columns")
+            print(f" Combined dataset: {combined_df.shape[0]} rows, {combined_df.shape[1]} columns")
             print(f"  Total samples: {total_rows}")
         
         return combined_df
@@ -148,7 +148,7 @@ class MultiFileDatasetLoader:
                 dfs.append(df)
                 
             except Exception as e:
-                print(f"  ⚠️ Error loading {file_path}: {str(e)}")
+                print(f" Error loading {file_path}: {str(e)}")
                 continue
         
         if not dfs:
@@ -157,7 +157,7 @@ class MultiFileDatasetLoader:
         combined_df = pd.concat(dfs, ignore_index=True)
         
         if verbose:
-            print(f"\n✓ Combined dataset: {combined_df.shape[0]} rows, {combined_df.shape[1]} columns")
+            print(f"\n Combined dataset: {combined_df.shape[0]} rows, {combined_df.shape[1]} columns")
         
         return combined_df
 
