@@ -1,15 +1,5 @@
 # FedHoeffCrypt Experiment Guide
 
-## ✅ Issues Fixed
-
-### 1. JSON Serialization Error
-- **Problem**: Numpy boolean values couldn't be serialized to JSON
-- **Solution**: Convert numpy booleans to Python booleans using `bool()` and `float()`
-
-### 2. TenSEAL Import Error
-- **Problem**: Regular `python` command uses Python 3.14, but TenSEAL only supports Python 3.7-3.10
-- **Solution**: Use `py -3.10` to run with Python 3.10 where TenSEAL is installed
-
 ## 🚀 How to Run Experiments
 
 ### Option 1: Using Python 3.10 directly
